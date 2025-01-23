@@ -1,3 +1,4 @@
+import axios from 'axios'
 import express from 'express'
 import dotenv from 'dotenv'
 
@@ -7,9 +8,11 @@ const app = express()
 
 app.use(express.json())
 
-app.post('/', (req, res) => {
+app.post('/', async (req, res) => {
   console.log(`Received POST request:`, req.body)
-  res.send('OK')
+  const { url, ...params } = req.body
+  const response = await axios.post(url, params)
+  res.send(response.data)
 })
 
 const port = process.env.PORT ?? 3070
