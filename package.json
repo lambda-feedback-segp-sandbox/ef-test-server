@@ -6,7 +6,7 @@
     "build": "yarn tsc",
     "format": "prettier --write \"**/*.{js,json,ts,tsx}\"",
     "start": "yarn node dist/index.js",
-    "test:types": "yarn tsc",
+    "test:types": "yarn tsc --noEmit",
     "test": "yarn test:types"
   },
   "bin": "dist/start.js",
