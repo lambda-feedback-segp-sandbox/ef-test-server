@@ -1,0 +1,8 @@
+# Dependencies
+/node_modules/
+
+# TypeScript
+tsconfig.tsbuildinfo
+
+# Build directory
+/dist/
