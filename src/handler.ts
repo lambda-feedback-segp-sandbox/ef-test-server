@@ -18,6 +18,10 @@ export async function handleRawRequest(body: unknown): Promise<object | null> {
   if (parseResult == null) return null
 
   const { url, evaluationFunctionRequestData } = parseResult
-  const response = await axios.post(url, evaluationFunctionRequestData)
-  return response.data
+  try {
+    const response = await axios.post(url, evaluationFunctionRequestData)
+    return response.data
+  } catch (_) {
+    return null
+  }
 }
