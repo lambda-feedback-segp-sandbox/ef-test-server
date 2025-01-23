@@ -4,12 +4,15 @@ import dotenv from 'dotenv'
 dotenv.config()
 
 const app = express()
-const port = process.env.PORT ?? 3070
+
+app.use(express.json())
 
 app.post('/', (req, res) => {
-  console.log('Received POST request')
+  console.log(`Received POST request:`, req.body)
   res.send('OK')
 })
+
+const port = process.env.PORT ?? 3070
 
 app.listen(port, () => {
   console.log(`Listening on port ${port}`)
