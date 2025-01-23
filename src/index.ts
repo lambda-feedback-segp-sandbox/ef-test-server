@@ -3,6 +3,8 @@ import cors from 'cors'
 import express from 'express'
 import dotenv from 'dotenv'
 
+import * as schema from './schema'
+
 dotenv.config()
 
 const app = express()
@@ -12,8 +14,9 @@ app.use(express.json())
 
 app.post('/', async (req, res) => {
   console.log(`Received POST request:`, req.body)
-  const { url, ...params } = req.body
-  const response = await axios.post(url, params)
+  const { url, ...evaluationFunctionRequestData } =
+    schema.TestServerRequestData.parse(req.body)
+  const response = await axios.post(url, evaluationFunctionRequestData)
   res.send(response.data)
 })
 
