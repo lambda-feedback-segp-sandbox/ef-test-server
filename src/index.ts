@@ -12,13 +12,22 @@ app.use(cors())
 app.use(express.json())
 
 app.post('/', async (req, res) => {
-  console.log(`Received POST request:`, req.body)
+  console.log(`[INFO] Received POST request:`, req.body)
   const responseData = await handleRawRequest(req.body)
-  res.send(responseData)
+  if (responseData == null) {
+    console.log('[WARN] Invalid request received and ignored.')
+    res.status(400).send()
+  } else {
+    console.log(
+      '[INFO] Received response from evaluation function:',
+      responseData,
+    )
+    res.send(responseData)
+  }
 })
 
 const port = process.env.PORT ?? 3070
 
 app.listen(port, () => {
-  console.log(`Listening on port ${port}`)
+  console.log(`[INFO] Listening on port ${port}`)
 })
