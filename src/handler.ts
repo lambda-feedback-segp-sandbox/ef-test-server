@@ -13,11 +13,22 @@ export function parseRequestBody(body: unknown): {
   return { url, evaluationFunctionRequestData }
 }
 
-export async function handleRawRequest(body: unknown): Promise<object | null> {
+export enum HandlerError {
+  ParseFailed,
+  ForwardingFailed,
+}
+
+export async function handleRawRequest(
+  body: unknown,
+): Promise<object | HandlerError> {
   const parseResult = parseRequestBody(body)
-  if (parseResult == null) return null
+  if (parseResult == null) return HandlerError.ParseFailed
 
   const { url, evaluationFunctionRequestData } = parseResult
-  const response = await axios.post(url, evaluationFunctionRequestData)
-  return response.data
+  try {
+    const response = await axios.post(url, evaluationFunctionRequestData)
+    return response.data
+  } catch (_) {
+    return HandlerError.ForwardingFailed
+  }
 }
