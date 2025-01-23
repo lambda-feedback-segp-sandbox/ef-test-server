@@ -1,9 +1,8 @@
-import axios from 'axios'
 import cors from 'cors'
 import express from 'express'
 import dotenv from 'dotenv'
 
-import * as schema from './schema'
+import { handleRawRequest } from './handler'
 
 dotenv.config()
 
@@ -14,10 +13,8 @@ app.use(express.json())
 
 app.post('/', async (req, res) => {
   console.log(`Received POST request:`, req.body)
-  const { url, ...evaluationFunctionRequestData } =
-    schema.TestServerRequestData.parse(req.body)
-  const response = await axios.post(url, evaluationFunctionRequestData)
-  res.send(response.data)
+  const responseData = await handleRawRequest(req.body)
+  res.send(responseData)
 })
 
 const port = process.env.PORT ?? 3070
