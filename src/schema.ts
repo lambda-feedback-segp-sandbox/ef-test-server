@@ -2,8 +2,12 @@ import { z } from 'zod'
 
 export const EvaluationFunctionRequestData = z
   .object({
-    answer: z.any(),
-    response: z.any(),
+    answer: z.union([z.string(), z.array(z.any()), z.object({}).passthrough()]),
+    response: z.union([
+      z.string(),
+      z.array(z.any()),
+      z.object({}).passthrough(),
+    ]),
     params: z.record(z.string(), z.any()),
   })
   .strict()
