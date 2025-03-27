@@ -1,5 +1,5 @@
 {
-  "name": "@lambda-feedback-segp-sandbox/ef-test-server",
+  "name": "@lambda-feedback/ef-test-server",
   "version": "0.5.0",
   "main": "dist/index.js",
   "scripts": {
