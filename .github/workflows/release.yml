@@ -2,7 +2,9 @@
 
 name: Publish package to GitHub Packages
 
-on: [push]
+on:
+  - push
+  - workflow_dispatch
 
 jobs:
   release:
