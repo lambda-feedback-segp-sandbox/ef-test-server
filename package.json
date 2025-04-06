@@ -1,6 +1,7 @@
 {
-  "name": "@lambda-feedback-segp-sandbox/ef-test-server",
-  "version": "0.5.0",
+  "name": "@lambda-feedback/ef-test-server",
+  "license": "UNLICENSED",
+  "version": "1.0.0",
   "main": "dist/index.js",
   "scripts": {
     "build": "yarn tsc",
